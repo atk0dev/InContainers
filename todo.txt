@@ -9,8 +9,4 @@ add logs from nginx
 add 127.0.0.1 to new domain names in hosts
 config with ngrok!!
 
-Project startup:
-1. clone repo
-2. trust / import pfx certificates
-3. add two hosts file entries
-4. run docker compose up
+

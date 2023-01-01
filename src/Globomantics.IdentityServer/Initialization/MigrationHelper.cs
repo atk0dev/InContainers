@@ -18,8 +18,9 @@ namespace Globomantics.IdentityServer.Initialization
                 serviceScope?.ServiceProvider.GetRequiredService<PersistedGrantDbContext>().Database.Migrate();
                 serviceScope?.ServiceProvider.GetRequiredService<ConfigurationDbContext>().Database.Migrate();
             }
-            catch (Exception)
+            catch (Exception exception)
             {
+                Console.WriteLine(exception);
                 // If the database is not available yet just wait and try again
                 var dbConnection = serviceScope?.ServiceProvider.GetRequiredService<PersistedGrantDbContext>().Database
                     .GetConnectionString();

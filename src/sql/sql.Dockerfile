@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/mssql/server 
+FROM mcr.microsoft.com/mssql/server:2019-latest
 
 ARG PROJECT_DIR=/tmp/globomantics
 RUN mkdir -p $PROJECT_DIR
