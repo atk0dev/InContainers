@@ -11,4 +11,11 @@
             <li>@day.Date.ToShortDateString() -- @day.Summary -- @day.TemperatureC -- @day.TemperatureF</li>
         }
     </ul>
+
+    <ul>
+        @foreach (var city in Model.Cities)
+        {
+            <li>@city.Name</li>
+        }
+    </ul>
 }

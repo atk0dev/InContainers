@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Globomantics.Core
+namespace Globomantics.Core.ClientModel
 {
     public class WeatherForecastModel
     {

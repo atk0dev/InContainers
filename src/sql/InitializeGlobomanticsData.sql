@@ -179,3 +179,50 @@ GO
 EXEC sp_addrolemember N'db_owner', [globo_dbuser];
 GO
 
+----
+
+USE [GlobomanticsData]
+GO
+
+CREATE TABLE [dbo].[Cities](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](50) NOT NULL,
+	[Description] [nvarchar](200) NULL,
+ CONSTRAINT [PK_Cities] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+
+CREATE TABLE [dbo].[PointsOfInterest](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](50) NOT NULL,
+	[Description] [nvarchar](200) NULL,
+	[CityId] [int] NOT NULL,
+ CONSTRAINT [PK_PointsOfInterest] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[PointsOfInterest]  WITH CHECK ADD  CONSTRAINT [FK_PointsOfInterest_Cities_CityId] FOREIGN KEY([CityId])
+REFERENCES [dbo].[Cities] ([Id])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[PointsOfInterest] CHECK CONSTRAINT [FK_PointsOfInterest_Cities_CityId]
+GO
+
+
+INSERT INTO [dbo].[Cities] ([Name], [Description]) VALUES ('New York City', 'The one with that big park.')
+INSERT INTO [dbo].[Cities] ([Name], [Description]) VALUES ('Antwerp', 'The one with the cathedral that was never really finished.')
+INSERT INTO [dbo].[Cities] ([Name], [Description]) VALUES ('Paris', 'The one with that big tower.')
+
+INSERT INTO [dbo].[PointsOfInterest] ([Name], [Description], [CityId]) VALUES ('Central Park', 'The most visited urban park in the United States.', 1)
+INSERT INTO [dbo].[PointsOfInterest] ([Name], [Description], [CityId]) VALUES ('Empire State Building', 'A 102-story skyscraper located in Midtown Manhattan.', 1)
+INSERT INTO [dbo].[PointsOfInterest] ([Name], [Description], [CityId]) VALUES ('Cathedral', 'A Gothic style cathedral, conceived by architects Jan and Pieter Appelmans.', 2)
+INSERT INTO [dbo].[PointsOfInterest] ([Name], [Description], [CityId]) VALUES ('Antwerp Central Station', 'The the finest example of railway architecture in Belgium.', 2)
+INSERT INTO [dbo].[PointsOfInterest] ([Name], [Description], [CityId]) VALUES ('Eiffel Tower', 'A wrought iron lattice tower on the Champ de Mars, named after engineer Gustave Eiffel.', 3)
+INSERT INTO [dbo].[PointsOfInterest] ([Name], [Description], [CityId]) VALUES ('The Louvre', 'The worlds largest museum.', 3)
+

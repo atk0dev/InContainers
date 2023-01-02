@@ -121,8 +121,7 @@ ul.navbar-nav {
 .banner img {
  position: relative;
     margin: 0 auto;
-    width: 100%;
-
+ 
 }
 .inner-content-right,.inner-content{position:absolute; top:150px; color:#fff;}
 .banner h1{font-size:48px; font-weight:bold; color:#fff; line-height:36px;}
@@ -214,7 +213,8 @@ width: 100%;}
 }
 .mobileImg{display: none;}
 
-footer {background-color: #F2F2F2; position:relative;height:320px;    height: 350px;
+footer {background-color: #F2F2F2; position:relative;
+    
     max-height: 360px;
     min-width: 320px;
     overflow: hidden;

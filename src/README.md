@@ -9,6 +9,7 @@ The database creation logic above will create the following users:
 * id-local.globomantics.com:5000
 * http://localhost:5342/#/events SEQ
 * http://localhost:5010/ SMTP
+* https://www-local.globomantics.com:44395/api/index.html API Swagger
 
 Entry point: 
 https://www-local.globomantics.com:44395/

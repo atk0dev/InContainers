@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
+using Globomantics.Core.ClientModel;
 using Microsoft.Extensions.Configuration;
 
 namespace Globomantics.Core.Services
@@ -20,6 +21,11 @@ namespace Globomantics.Core.Services
         public async Task<List<WeatherForecastModel>> GetWeatherForecastAsync()
         {
             return await _cli.GetFromJsonAsync<List<WeatherForecastModel>>("v1/weatherforecast");
+        }
+
+        public async Task<List<City>> GetCitiesAsync()
+        {
+            return await _cli.GetFromJsonAsync<List<City>>("v1/cities");
         }
     }
 }
