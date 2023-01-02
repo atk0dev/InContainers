@@ -5,8 +5,10 @@ The database creation logic above will create the following users:
 * kim@mars.com / `to1nfinity!`
 * stanley@mars.com / `to1nfinity!`
 
-## Identity server 
+## Urls
 * id-local.globomantics.com:5000
+* http://localhost:5342/#/events SEQ
+* http://localhost:5010/ SMTP
 
 Entry point: 
 https://www-local.globomantics.com:44395/

@@ -1,0 +1,15 @@
+https://gist.github.com/dahlsailrunner/679e6dec5fd769f30bce90447ae80081
+
+# For identity 
+
+sudo openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -keyout id-local.key -out id-local.crt -config id-local.conf -passin pass:My1StrongP@ssword
+
+sudo openssl pkcs12 -export -out id-local.pfx -inkey id-local.key -in id-local.crt
+
+
+# For WWW
+
+sudo openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -keyout www-local.key -out www-local.crt -config www-local.conf -passin pass:My1StrongP@ssword
+
+sudo openssl pkcs12 -export -out www-local.pfx -inkey www-local.key -in www-local.crt
+
