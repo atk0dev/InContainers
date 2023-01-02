@@ -77,12 +77,12 @@ services:
       dockerfile: sql/sql.Dockerfile
     restart: always
     ports:
-      - "1440:1433"   
+      - "1444:1433"   
     environment:      
       - ACCEPT_EULA=Y
       - SA_PASSWORD=Sqlc0ntainersFTW!
     networks:
       - globonet
-
+    
 networks:
   globonet: {}

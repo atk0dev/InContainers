@@ -6,6 +6,7 @@ using IdentityServer4.EntityFramework.Mappers;
 using IdentityServer4.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using Serilog;
 
 namespace Globomantics.IdentityServer.Initialization
 {
@@ -15,6 +16,7 @@ namespace Globomantics.IdentityServer.Initialization
     {
         public static void PopulateDatabaseIfEmpty(this IApplicationBuilder app)
         {
+            Log.Information($"Begin PopulateDatabaseIfEmpty");
             using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
             {
                 var context = serviceScope.ServiceProvider.GetRequiredService<ConfigurationDbContext>();
@@ -56,6 +58,7 @@ namespace Globomantics.IdentityServer.Initialization
                     context.SaveChanges();
                 }
             }
+            Log.Information($"End PopulateDatabaseIfEmpty success");
         }
 
         public static IEnumerable<Client> GetClients()

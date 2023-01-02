@@ -1,11 +1,11 @@
 USE master
 GO
-DROP DATABASE IF EXISTS Globomantics
+DROP DATABASE IF EXISTS GlobomanticsData
 GO
 
-CREATE DATABASE Globomantics
+CREATE DATABASE GlobomanticsData
 GO 
-USE Globomantics
+USE GlobomanticsData
 GO 
 CREATE TABLE [dbo].[GlobomanticsUser](
 	[UserId] [BIGINT] IDENTITY(1,1) NOT NULL,
@@ -148,6 +148,23 @@ GO
 
 ALTER TABLE dbo.[UserToken] CHECK CONSTRAINT [FK_UserToken_User_UserId]
 GO
+
+---
+
+CREATE TABLE [dbo].[TestLog](
+	[Id] [INT] IDENTITY(1,1) NOT NULL,
+	[InfoMessage] [NVARCHAR](MAX) NULL,
+	[MessageAtDate] [DATETIME] NULL,
+ CONSTRAINT [PK_TestLog] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+INSERT INTO [dbo].[TestLog] (InfoMessage, MessageAtDate) VALUES ('Database crated', GETDATE() )
+
+
 ----------------------------------------------------------------------------
 --- DB USER CREATION
 ----------------------------------------------------------------------------
@@ -155,20 +172,10 @@ USE master;
 GO
 CREATE LOGIN [globo_dbuser] WITH PASSWORD=N'SqlonLinux?!', CHECK_EXPIRATION=OFF, CHECK_POLICY=ON;
 GO
-USE Globomantics;
+USE GlobomanticsData;
 GO
 CREATE USER [globo_dbuser] FOR LOGIN [globo_dbuser];
 GO
 EXEC sp_addrolemember N'db_owner', [globo_dbuser];
 GO
 
---
-USE master
-GO
-DROP DATABASE IF EXISTS GlobomanticsIdSrv
-GO
-
-CREATE DATABASE GlobomanticsIdSrv
-GO 
-USE GlobomanticsIdSrv
-GO 

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30626.31
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Globomantics.IdentityServer", "Globomantics.IdentityServer\Globomantics.IdentityServer.csproj", "{557D4A0D-AE3F-40D6-9D4C-9E296EF45DB1}"
 EndProject
@@ -10,9 +10,11 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sql", "sql", "{B5AA248D-DF57-4E00-B18A-CE09DA3D7FCF}"
 	ProjectSection(SolutionItems) = preProject
 		sql\entrypoint.sh = sql\entrypoint.sh
-		sql\InitializeGlobomanticsDb.sql = sql\InitializeGlobomanticsDb.sql
-		sql\setup.sh = sql\setup.sh
+		sql\InitializeGlobomanticsIdentity.sql = sql\InitializeGlobomanticsIdentity.sql
+		sql\InitializeGlobomanticsData.sql = sql\InitializeGlobomanticsData.sql
+		sql\setup-identity.sh = sql\setup-identity.sh
 		sql\sql.Dockerfile = sql\sql.Dockerfile
+		sql\setup-data.sh = sql\setup-data.sh
 		sql\wait-for-it.sh = sql\wait-for-it.sh
 	EndProjectSection
 EndProject

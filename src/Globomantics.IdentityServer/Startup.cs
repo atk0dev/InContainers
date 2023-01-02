@@ -37,7 +37,7 @@ namespace Globomantics.IdentityServer
             services.AddRazorPages();
 
             services.AddScoped<IDbConnection, SqlConnection>(db =>
-                new SqlConnection(Configuration.GetConnectionString("GlobomanticsDb")));
+                new SqlConnection(Configuration.GetConnectionString("GlobomanticsDataConnection")));
 
             services.AddAuthentication(options =>
             {
@@ -87,7 +87,7 @@ namespace Globomantics.IdentityServer
                 .AddPasswordValidator<CustomPasswordValidator>()
                 .AddUserValidator<CustomUserValidator>();
 
-            var connStr = Configuration.GetConnectionString("IS4DbConnection");
+            var connStr = Configuration.GetConnectionString("GlobomanticsIdentityConnection");
             var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
             services.AddIdentityServer(options =>
                 {
