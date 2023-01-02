@@ -1,0 +1,31 @@
+image:
+  file: .gitpod.Dockerfile
+
+tasks:
+
+  - name: Restore
+    before: |
+      dotnet dev-certs https 
+      dotnet restore src/Globomantics.sln  
+    init: dotnet build src/Globomantics.sln.sln
+    
+  - name: Docker
+    command: docker-compose -f backend/docker-compose.yml up
+      
+vscode:
+  extensions:
+    - muhammad-sammy.csharp
+    - sdras.night-owl
+    - humao.rest-client
+    - ms-azuretools.vscode-docker
+    - ckolkman.vscode-postgres
+    - rangav.vscode-thunder-client
+    - vscode-icons-team.vscode-icons
+    - patcx.vscode-nuget-gallery
+    
+ports:
+
+  - port: 5001
+    onOpen: "ignore"
+    name: test port
+    description: Test port
