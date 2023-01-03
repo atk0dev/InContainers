@@ -1,0 +1,38 @@
+zabbix_export:
+  version: '6.0'
+  date: '2022-12-28T22:16:34Z'
+  groups:
+    -
+      uuid: 16bd28f91a0e437abfb800f7285b7e38
+      name: 'And Templates'
+  templates:
+    -
+      uuid: 10e4e5e0f6ab4e8aaac72223d6932436
+      template: 'And Web API'
+      name: 'And Web API'
+      description: 'My Templates'
+      groups:
+        -
+          name: 'And Templates'
+      httptests:
+        -
+          uuid: aea866c5ae2a4aec839bef1e73b177da
+          name: 'My web app health check'
+          attempts: '2'
+          agent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36'
+          steps:
+            -
+              name: 'Get test request'
+              url: 'https://devatk11.eu.ngrok.io/api/person/1'
+              follow_redirects: 'NO'
+              retrieve_mode: BOTH
+              required: Spain
+              status_codes: '200'
+          tags:
+            -
+              tag: target
+              value: webapi
+      tags:
+        -
+          tag: class
+          value: api

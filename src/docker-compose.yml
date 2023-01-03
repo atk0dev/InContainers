@@ -84,5 +84,51 @@ services:
     networks:
       - globonet
     
+  zabbix-db:
+    image: postgres:14.6
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:      
+      - POSTGRES_PASSWORD=P@ssw0rd!
+      - PGDATA=/var/lib/posgresql/14/data
+    networks:
+      - globonet
+    volumes:
+      - ./zabbix/postgres/data:/var/lib/posgresql/14/data
+      - ./zabbix/postgres/backup:/var/lib/posgresql/14/backup
+      - ./zabbix/db.sql:/docker-entrypoint-initdb.d/db.sql
+
+  zabbix-srv:
+    image: zabbix/zabbix-server-pgsql:6.0-centos-latest
+    restart: always
+    networks:
+      - globonet
+    environment:      
+      - DB_SERVER_HOST=zabbix-db
+      - POSTGRES_USER=userzabbix
+      - POSTGRES_PASSWORD=P@ssw0rd!
+      - POSTGRES_DB=dbzabbix
+    depends_on:
+      - zabbix-db
+      
+  zabbix-web:
+    image: zabbix/zabbix-web-nginx-pgsql:6.0-centos-latest
+    restart: always
+    ports:
+      - "8080:8080"
+    networks:
+      - globonet
+    environment:      
+      - DB_SERVER_HOST=zabbix-db
+      - POSTGRES_USER=userzabbix
+      - POSTGRES_PASSWORD=P@ssw0rd!
+      - POSTGRES_DB=dbzabbix
+      - ZBX_SERVER_HOST=zabbix-srv
+      - PHP_TZ=Europe/Kyiv
+    depends_on:
+      - zabbix-srv
+
+    
 networks:
   globonet: {}
