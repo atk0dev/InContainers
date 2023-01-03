@@ -1,6 +1,6 @@
 zabbix_export:
   version: '6.0'
-  date: '2023-01-03T17:44:23Z'
+  date: '2023-01-03T18:24:57Z'
   groups:
     -
       uuid: 16bd28f91a0e437abfb800f7285b7e38
@@ -20,7 +20,20 @@ zabbix_export:
           name: 'Globomantics API'
           type: HTTP_AGENT
           key: web.globomantics.api
+          trends: '0'
+          value_type: TEXT
+          preprocessing:
+            -
+              type: REGEX
+              parameters:
+                - '^HTTP\/1.1 ([0-9].{3})'
+                - \1
           url: 'https://www-local.globomantics.com:44395/api/index.html'
+          retrieve_mode: HEADERS
+          tags:
+            -
+              tag: target
+              value: globoapi
       httptests:
         -
           uuid: 7d59e508c9484d22b47caba7d4bc6197
@@ -31,21 +44,20 @@ zabbix_export:
             -
               name: 'Identity web'
               url: 'https://id-local.globomantics.com:44395'
-              follow_redirects: 'NO'
               retrieve_mode: HEADERS
               timeout: 5s
               status_codes: '200'
             -
               name: 'Identity config'
               url: 'https://id-local.globomantics.com:44395/.well-known/openid-configuration'
-              follow_redirects: 'NO'
-              retrieve_mode: HEADERS
+              retrieve_mode: BOTH
               timeout: 5s
+              required: issuer
               status_codes: '200'
           tags:
             -
               tag: target
-              value: webapi
+              value: globoidentity
         -
           uuid: aea866c5ae2a4aec839bef1e73b177da
           name: 'My web app health check'
@@ -62,8 +74,8 @@ zabbix_export:
           tags:
             -
               tag: target
-              value: webapi
+              value: globoweb
       tags:
         -
           tag: class
-          value: api
+          value: globomantics
