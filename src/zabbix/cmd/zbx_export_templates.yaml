@@ -1,6 +1,6 @@
 zabbix_export:
   version: '6.0'
-  date: '2022-12-28T22:16:34Z'
+  date: '2023-01-03T17:44:23Z'
   groups:
     -
       uuid: 16bd28f91a0e437abfb800f7285b7e38
@@ -14,7 +14,38 @@ zabbix_export:
       groups:
         -
           name: 'And Templates'
+      items:
+        -
+          uuid: a5bcef53d5ac4865aae0cab85cf68871
+          name: 'Globomantics API'
+          type: HTTP_AGENT
+          key: web.globomantics.api
+          url: 'https://www-local.globomantics.com:44395/api/index.html'
       httptests:
+        -
+          uuid: 7d59e508c9484d22b47caba7d4bc6197
+          name: 'My identity health check'
+          attempts: '2'
+          agent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36'
+          steps:
+            -
+              name: 'Identity web'
+              url: 'https://id-local.globomantics.com:44395'
+              follow_redirects: 'NO'
+              retrieve_mode: HEADERS
+              timeout: 5s
+              status_codes: '200'
+            -
+              name: 'Identity config'
+              url: 'https://id-local.globomantics.com:44395/.well-known/openid-configuration'
+              follow_redirects: 'NO'
+              retrieve_mode: HEADERS
+              timeout: 5s
+              status_codes: '200'
+          tags:
+            -
+              tag: target
+              value: webapi
         -
           uuid: aea866c5ae2a4aec839bef1e73b177da
           name: 'My web app health check'
@@ -22,11 +53,11 @@ zabbix_export:
           agent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36'
           steps:
             -
-              name: 'Get test request'
-              url: 'https://devatk11.eu.ngrok.io/api/person/1'
+              name: 'Globomantics web'
+              url: 'https://www-local.globomantics.com:44395'
               follow_redirects: 'NO'
-              retrieve_mode: BOTH
-              required: Spain
+              retrieve_mode: HEADERS
+              timeout: 5s
               status_codes: '200'
           tags:
             -
